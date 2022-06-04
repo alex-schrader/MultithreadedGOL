@@ -3,6 +3,7 @@
 This program runs Conway's Game of Life on the commandline, allowing the user to customize the starting seed file and the number of threads used in the program. It can be displayed either in terminal in "ASCII Mode" or using the paraVisi library. In running the program with various thread counts, the user can see the increased speed from running the program with multiple cores. In practice, I have found the most efficient number to be around 8 for my machine.
 
 ![Alt Text](https://github.com/alex-schrader/MultithreadedGOL/blob/master/golDemo.gif)
+![](http://i.imgur.com/60bts.gif)
 
 ## Getting Started
 
