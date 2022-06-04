@@ -16,6 +16,7 @@ print_partition[0,1]: If you are curious, a 1 in this argument shows how the boa
 ### Demo
 
 ![](golDemo.gif)
+![Alt Text](https://github.com/alex-schrader/MultithreadedGOL/blob/master/golDemo.gif)
 
 
 ## Authors
