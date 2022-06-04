@@ -18,7 +18,8 @@ partition[0,10]: the program partitions the board into rows or columns, and assi
 print_partition[0,1]: If you are curious, a 1 in this argument shows how the board was split up. 
 
 ### Demo
-![](https://github.com/alex-schrader/MultithreadedGOL/blob/master/golDemo.gif)
+![](golDemo.gif)
+
 
 ## Authors
 
