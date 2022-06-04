@@ -4,23 +4,23 @@ This program runs Conway's Game of Life on the commandline, allowing the user to
 
 ## Getting Started
 
-To run, install the necessary dependencies, and run the makefile. This program takes 5 arguments:
-./gol file.txt output_mode[0,1,2] num_threads partition[0,1] print_partition[0,1]
+To run, install the necessary dependencies, and run the makefile. Then run: 
+ - `./gol file.txt output_mode[0,1,2] num_threads partition[0,1] print_partition[0,1]`
 
-file.txt: the seed file to run. Provided files are in the repo(e.g. explode.txt)
-output_mode[0,1,2]: There are 3 options for how to display the game(0: no visualization, 1: ASCII, 2: ParaVisi)
-num_threads: the number of threads for the program to use
-partition[0,10]: the program partitions the board into rows or columns, and assigns each row/col to a thread. 0: row, 1: col. 
-print_partition[0,1]: If you are curious, a 1 in this argument shows how the board was split up. 
+This takes 5 arguments
+
+ - file.txt: the seed file to run. Provided files are in the repo(e.g. explode.txt)
+ - output_mode[0,1,2]: There are 3 options for how to display the game(0: no visualization, 1: ASCII, 2: ParaVisi)
+ - num_threads: the number of threads for the program to use
+ - partition[0,10]: the program partitions the board into rows or columns, and assigns each row/col to a thread. 0: row, 1: col. 
+ - print_partition[0,1]: If you are curious, a 1 in this argument shows how the board was split up. 
 
 ### Demo
 
 ![](golDemo.gif)
 
-
 ## Authors
 
-Contributors:
-Alex Schrader
-Jonathon Lee
-Swarthmore College starter code
+ - Alex Schrader
+ - Jonathon Lee
+ - Swarthmore College starter code
