@@ -1,0 +1,91 @@
+TODO: (1) Complete this side (partitioning function), implement, & test
+      (2) Complete reverse side (overall program design), implement, & test
+(To print, run 'lpr design_worksheet')
+********************************************************************************
+(1) Board-partitioning function design
+    Reminder: Look at the whole LAB WRITEUP for information on how partitioning
+              should work and suggestions on how to get started.
+    
+Q1: What parameters does this function need and what does it return?  Design 
+    its prototype? 
+
+    The number threads and which way it partitions the grid, both of which 
+    as an integer. 
+
+    Return values: the thread ID, the start and end row/col index values, 
+    total number of rows/cols it is allocated.
+
+    void* partitioning(int numT, int wayOfPart, void* ID, int start, int end)
+
+    (Pro tip: pass-by-pointer params are a way to "return" multiple values.)
+Q2: What does this function do?  Design your function's high-level control 
+    flow, and then refine in details. 
+
+    It divides the grid, based on the user's command argument, into desired
+    sections. If the number of rows/cols is evenly divisble, then each pair 
+    of start and end index will be evenly apart. If not, one will be added to
+    the first "remainder" IDs
+    Based on the ID, sets the start and end index
+
+    numrows = total rows//numthreads
+    remainder = totalRows - (numrows * numthreads)
+    if id < remainder: 
+        id_start = id*(numrows+1)
+    else: 
+        id = (remainder*(numrows+1)) + (id - remainder)*(numrows)
+
+Q3: How are you going to test your function's correctness?  What are the 
+    different config and command-line options you want to test?
+    We want to test it with the print partition function. We want to make
+    sure that all of the values return from pour partition function is 
+    consistent with our design. 
+    We want to test it for both row and col partition. We want to test for
+    when remainder is 0 and when remainder is not zero. 
+
+(2) Overall parallel gol program design
+    Reminder: Look at the LAB WRITEUP to understand requirements & control flow
+
+Q1: What changes need to be made to main's control flow for pthreads? 
+
+    First we make and array of threads (thread_t) and an array of structs(thread_args) 
+    of size numthread
+    each struct in the thread_args array contains information about thread ID, start
+    row, end row, start col, end col
+    Then we call the parition fucniton in parallel using the create function and 
+    initialize the structs
+    Then we run play gol in parallel with the our thread_args as a parameter. Each 
+    time we call update, we only update the portion of the grid that corresponds to 
+    the current thread. 
+    
+
+Q2: What additional state do you need to add to the parallel solution?  
+    New globals or data structures?  Modifications to existing data structures?
+
+    We need to use struct to keep all the informations needed for our thread_args
+    such as start row index and end row index. We are not modifying any existing 
+    data structures.
+
+Q3: What changes need to be made to parallelize play_gol?  Design the 
+    high-level control flow of the pthread version of play_gol, and refine as 
+    needed.  Do you need any new helper functions?  Modify existing ones?  
+    Any parts only 1 thread performs?
+
+    We run playgol in parallel at first, with each thread handling their respective 
+    part of the grid. 
+    Every thread calls updateboard, which now receives two parameters: data and 
+    the thread's struct in thread_args.
+    If running in paravisi mode, update the color of each board.
+    We synchronize all threads using barrier at this point
+    We call swapboard if thread id is 0 so only one thread swaps the board.
+    If we are to run in any output mode 1, we synchronize the threads. we only call print 
+    board when threadid is 0, so that only one thread prints the board.
+
+    Only 1 thread swaps board pointers, only 1 thread calls print_board
+
+
+Q4: Does your solution need synchronization?  How many and what type?  Where?
+
+    Yes, before We call update for the next iteration, we synchronize
+    all threads to make sure everything is synchronize. We also need to synchronize it 
+    before each printboard if we are running in ascii mode. We can use barrier 
+    for (num of iteration) times before calling updateboard and printboard. 
