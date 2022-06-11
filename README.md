@@ -2,6 +2,10 @@
 
 This program runs Conway's Game of Life on the commandline, allowing the user to customize the starting seed file and the number of threads used in the program. It can be displayed either in terminal in "ASCII Mode" or using the paraVisi library. In running the program with various thread counts, the user can see the increased speed from running the program with multiple cores. In practice, I have found the most efficient number to be around 8 for my machine.
 
+### Demo
+
+![](golDemo.gif)
+
 ## Getting Started
 
 To run, install the necessary dependencies, and run the makefile. Then run: 
@@ -14,10 +18,6 @@ This takes 5 arguments
  - num_threads: the number of threads for the program to use
  - partition[0,10]: the program partitions the board into rows or columns, and assigns each row/col to a thread. 0: row, 1: col. 
  - print_partition[0,1]: If you are curious, a 1 in this argument shows how the board was split up. 
-
-### Demo
-
-![](golDemo.gif)
 
 ## Authors
 
